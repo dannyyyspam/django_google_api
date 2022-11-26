@@ -1,60 +1,55 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} 
+{% load static %} 
 
 {% block extend_head %}
 
-<script src='https://www.google.com/recaptcha/api.js?render={{recaptcha_site_key}}'></script>
+<script src="https://www.google.com/recaptcha/api.js?
+render={{recaptcha_site_key}}"></script>
 
-{% endblock %}
+{% endblock %} 
 
 {% block content %}
 
-<h3>Django Google API Course - Sign Up</h3>
+<h3>Django Google API - Sign Up</h3>
 
 <div class="container">
+  <form id="signupform" method="POST" action="/sign-up">
+    {% csrf_token %}
 
-    <form id="signupform" method="POST" action="/sign-up">
-        {% csrf_token %}
+    <label for="first_name">First Name</label>
+    {{form.first_name}}
 
+    <label for="last_name">Last Name</label>
+    {{form.last_name}}
 
-        <label for="first_name">First Name</label>
-        {{form.first_name}}
+    <label for="username">Username</label>
+    {{form.username}}
 
-        <label for="last_name">Last Name</label>
-        {{form.last_name}}
+    <label for="password1">Password</label>
+    {{form.password1}}
 
-        <label for="username">Username</label>
-        {{form.username}}
+    <label for="password2">Confirm Password</label>
+    {{form.password2}} {{form.token}}
 
-        <label for="password1">Password</label>
-        {{form.password1}}
+    <label class="check-container"
+      >Show Passwords
+      <input type="checkbox" onclick="showPword()" />
+      <span class="checkmark"></span>
+    </label>
 
-        <label for="password2">Confirm Password</label>
-        {{form.password2}}
-
-        {{form.token}}
-
-        <label class="check-container">Show Passwords
-            <input type="checkbox" onclick="showPword()">
-            <span class="checkmark"></span>
-        </label>
-
-        <button type="submit">Sign up</button>
-
-    </form>
+    <button type="submit">Sign up</button>
+  </form>
 </div>
-
 
 </div>
 
-{% endblock %}
+{% endblock %} 
 
 {% block extend_footer %}
 
 <script type="text/javascript">
-    // Create a variable that can be used in main.js
-    var recaptcha_site_key = '{{recaptcha_site_key|safe}}'
+  // Create a variable that can be used in main.js
+  var recaptcha_site_key = "{{recaptcha_site_key|safe}}";
 </script>
-
 
 {% endblock %}
